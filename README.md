@@ -1,24 +1,28 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Database used is sqlite3
 
-Things you may want to cover:
+* Ruby version used is 2.7.5
 
-* Ruby version
+* Rails version used is 7.0.4
 
-* System dependencies
+* Running the app
+- bundle install
+- rails db:create
+- rails db:migrate
+- rails db:seed
 
-* Configuration
+* APIs
+POST http://localhost:3000/api/auth/login
+Prameters: Email, password
+Description: This API will take email and password as input, validate the password and return the token, this token consists the user ID in encrypted format and will be used for authentication of API calls.
 
-* Database creation
 
-* Database initialization
+GET http://localhost:3000/api/check_balance
+Authentication method: Bearer Auth Example: Authorization token_of_user
+Description: This API returns the calculated balance of the user validated by the token.
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+POST http://localhost:3000/api/transactions
+Prameter: transaction hash consist of amount and target_wallet_id
+Desctription: This API will create transaction entry, the source wallet will be user's wallet who is logged in(authenticated by the token). Target wallet is the wallet in which the amount should be credited. Validation of available balance is present in the API to validate the amount transfer.
