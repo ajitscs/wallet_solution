@@ -15,11 +15,8 @@ class Account < ApplicationRecord
   private
 
   def wallet_creation
-    # creating wallet with 50 INR as a basic amount for testing!, ideally this amount should be updated by admin
-    # this balance entry also introduce a difference of 50 INR in the wallet balance calculation
-    # Solution: Create a transaction from Admin wallet to self wallet for this amount(50)
-    wallet = self.create_wallet(balance: 50, currency: 'INR')
-    # Transaction.create(amount: 50, source_wallet_id: super_admin.wallet.id, target_wallet_id: wallet.id)
+    # create wallet with 0 balance, Admin can add balance by transaction API call
+    Wallet.create(account_id: self.id, balance: 0, currency: 'INR')
   end
 
 end
